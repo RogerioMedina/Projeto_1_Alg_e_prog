@@ -96,6 +96,7 @@ void remocaoLivros(livros vec[], int *num_livros){
             if(vec[i].id == id){
                 encontrado = true;
                 pos = i;
+                break;
             }
         }
         if(encontrado){
