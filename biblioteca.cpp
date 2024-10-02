@@ -42,6 +42,7 @@ void printLivros(){
 
 void emprstimoLivros(livros l[100]){
     int opc = 0;
+    int indice;
     
     while(opc != 1 || opc != 2){
         cout<<"Como deseja procurar o livro para emprestimo?"<<endl;
@@ -53,7 +54,7 @@ void emprstimoLivros(livros l[100]){
     }
 
     if(opc == 1){
-        int id, indice;
+        int id;
         cout<<"Insira o ID do livro: ";
         cin>>id;
         
@@ -67,7 +68,6 @@ void emprstimoLivros(livros l[100]){
 
     if(opc == 2){
         char titulo = 100;
-        int indice;
         cout<<"Insira o nome do livro: ";
         cin>>titulo;
 
@@ -79,7 +79,21 @@ void emprstimoLivros(livros l[100]){
     }
 
     if(l[indice].qtd_disp > 0){
+        char nome[100];
+        int telefone;
+
+        cout<<"Insira seu nome: ";
+        cin>>nome;
+        cout<<"Insira seu numero de telefone: ";
+        cin>>telefone;
+
+        l[indice].locatarios[11-l[indice].qtd_disp].nome = nome;
+        l[indice].locatarios[11-l[indice].qtd_disp].telefone = telefone;
+
         cout<<"Livro emprestado com sucesso.";
+        l[indice].qtd_disp = l[indice].qtd_disp-1;
+    }else{
+        cout<<"Não há mais copias disponiveis";
     }
 
 
