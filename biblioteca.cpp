@@ -85,8 +85,70 @@ void emprstimoLivros(livros l[100]){
 
 }
 
-void devolucaoLivros(struct livros l){
-    cout << "Digite o nome do livro que vai ser devolido: ";
+void devolucaoLivros(struct livros l[],int *num_locatarios){ 
+    int opc = 0;
+    while(opc != 1 || opc != 2){
+        cout << "Como deseja devolver o livro? " << endl;
+        cout << "1-id \n2-titulo";
+        cin >> opc;
+        if(opc != 1 || opc != 2){
+            cout<<"Digite uma opção valida"<<endl;
+        if (opc == 1){
+            int id,indice;
+            cout << "Digite o id do livro que esta sendo devolvido: ";
+            cin >> id;
+            for (indice = 0;indice < 100;indice++){
+                if (l.id[indice] == id){
+                    char locatario = 50;
+                    cout << "Digite o nome de quem esta devolvendo o livro: ";
+                    cin >> locatario;
+                    for (indice = 0;indice < 100;indice++){
+                        if (l.locatario[indice] == locatario){
+                            pos = indice;
+                            for (indice = pos ;indice < (*num_locatarios-1);indice ++){
+                                l[indice] = l[indice+1];
+                                (*num_locatarios--);
+                                cout <<"Livro devolvido!";
+                                break
+                                     }
+                else{
+                    cout << "id nao encontrado!";
+                    continue;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+        if (opc == 2){
+            int indice;
+            char titulo = 100;
+            cout << "Digite o titulo do livro que esta sendo devolvido: ";
+            cin >> titulo;
+            for (indice = 0;indice<100;indice++){
+                if (strcmp(l[indice].titulo, titulo) !=0){
+                    char locatario = 50;
+                    cout << "Digite o nome de quem esta devolvendo o livro: ";
+                    cin >> locatario;
+                    for (indice = 0;indice < 100;indice++){
+                        if (l.locatario[indice] == locatario){
+                            pos = indice;
+                            for (indice = pos ;indice < (*num_locatarios-1);indice ++){
+                                l[indice] = l[indice+1];
+                                (*num_locatarios--);
+                                cout << "livro devolvido!";
+                                break;
+                else{
+                    cout << "titulo nao encontrado!";
+                    continue;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 }
 
