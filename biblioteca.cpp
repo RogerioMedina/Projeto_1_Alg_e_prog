@@ -85,7 +85,7 @@ void emprstimoLivros(livros l[100]){
 
 }
 
-void devolucaoLivros(struct livros l[],int *num_locatarios){ 
+void devolucaoLivros(struct livros l[100],int *num_locatarios){ 
     int opc = 0;
     while(opc != 1 || opc != 2){
         cout << "Como deseja devolver o livro? " << endl;
