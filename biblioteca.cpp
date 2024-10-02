@@ -17,16 +17,22 @@ struct livros{
     
 };
 
-void cadastroLivros(struct livros *l){
+void cadastroLivros(struct livros vetorLivros[], *pos){
+
+    
+
     printf("Insira o titulo: ");
-    scanf("%c", &l -> titulo);
+    scanf(" %[^\n]", &vetorLivros[*pos].titulo);
     printf("Insira o autor: ");
-    scanf("%c", &l -> autor);
+    scanf(" %[^\n]", &vetorLivros[*pos].autor);
     printf("Insira o numero de paginas: ");
-    scanf("%i", &l -> num_pag);
-    printf("Insira a a");
+    scanf("%d", &vetorLivros[*pos].num_pag);
+    printf("Insira o ano de publicacao: ");
+    scanf("%d", &vetorLivros[*pos].ano_publi);
     printf("Insira o ID: ");
-    scanf("%i", &l -> id);
+    scanf("%d", &vetorLivros[*pos].id);
+
+    (*pos)++;
 }
 
 void printLivros(){
@@ -84,7 +90,7 @@ void devolucaoLivros(struct livros l){
 
 }
 
-void remocaoLivros(livros vec[], int *num_livros){
+void removerLivro(livros vec[], int *num_livros){
     while(true){
         int id;
         cout << "Digite o ID do livro para remover do acervo: ";
@@ -115,22 +121,52 @@ void remocaoLivros(livros vec[], int *num_livros){
 
 int main()
 {
+    struct livros vetorLivros[100];
+    int opt, qtdade = 0;
 
-    cout << "Selecione a opção desejada:" << endl;
-    cout << "1 - Cadastrar Livro" << endl;
-    cout << "2 - Consultar livro" << endl;
-    cout << "3 - Emprestimos de livros" << endl;
-    
-    switch (option)
+    while(opt != 6){
+
+    cout << "-------------------------------------" << endl;
+    cout << "---------------MENU------------------" << endl;
+    cout << "-------------------------------------" << endl;
+    cout << "----- 1 - Cadastrar Livro -----------" << endl;
+    cout << "----- 2 - Consultar livro -----------" << endl;
+    cout << "----- 3 - Emprestimos de livros -----" << endl;
+    cout << "----- 4 - Devolucao de livros -------" << endl;
+    cout << "----- 5 - Remocao de livros ---------" << endl;
+    cout << "----- 6 - Sair do programa ----------" << endl;
+    cout << "-------------------------------------" << endl;
+    cout << "Selecione a opcao desejada: ";
+    cin >> opt;
+
+    switch (opt)
     {
     case 1:
-        /* constant-expression */:
-        /* code */
-        break;
     
-    default:
-        break;
+        cadastroLivros(vetorLivros, &qtdade);
+    
+    case 2:
+
+        consultarLivros();
+        
+    case 3:
+
+        emprestimoLivros();
+
+    case 4: 
+
+        devolucaoLivros();
+    
+    case 5:
+
+        removerLivro();
+
+    case 6:
+
+        exit;
     }
 
+    }
+    return 0;
 
 }
