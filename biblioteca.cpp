@@ -79,7 +79,7 @@ void emprstimoLivros(livros l[100]){
     }
 
     if(l[indice].qtd_disp > 0){
-        cout<<"Livro emprestado comsucesso";
+        cout<<"Livro emprestado com sucesso.";
     }
 
 
@@ -159,7 +159,7 @@ int main()
     
     case 5:
 
-        removerLivro();
+        removerLivro(vetorLivros, &qtdade);
 
     case 6:
 
