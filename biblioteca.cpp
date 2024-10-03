@@ -176,14 +176,19 @@ void devolucaoLivros(struct livros l[], int *num_locatarios){
             cin >> id;
             for (indice = 0;indice < 100;indice++){
                 if (l.id[indice] == id){
-                    char locatario = 50;
+                    char nome = 50;
+                    int telefone;
                     cout << "Digite o nome de quem esta devolvendo o livro: ";
-                    cin >> locatario;
+                    cin >> nome;
+                    cout << "Telefone: ";
+                    cin >> telefone;
                     for (indice = 0;indice < 100;indice++){
-                        if (l.locatario[indice] == locatario){
+                        if (strcmp(l[indice].locatario[indice].nome,nome) != 0){
+                            if(l[indice].locatario[indice].telefone == telefone){
                             pos = indice;
                             for (indice = pos ;indice < (*num_locatarios-1);indice ++){
-                                l[indice] = l[indice+1];
+                                l[indice].locatario[indice].nome = l[indice+1].locatario[indice+1].nome;
+                                l[indice].locatario[indice].telefone = l[indice+1].locatario[indice+1].telefone;
                                 (*num_locatarios--);
                                 cout <<"Livro devolvido!";
                                 break
@@ -194,10 +199,12 @@ void devolucaoLivros(struct livros l[], int *num_locatarios){
                             }
                         }
                     }
+                    
                 }
             }
         }
     }
+    
         if (opc == 2){
             int indice;
             char titulo = 100;
@@ -205,14 +212,19 @@ void devolucaoLivros(struct livros l[], int *num_locatarios){
             cin >> titulo;
             for (indice = 0;indice<100;indice++){
                 if (strcmp(l[indice].titulo, titulo) !=0){
-                    char locatario = 50;
+                    char nome = 50;
+                    int telefone;
                     cout << "Digite o nome de quem esta devolvendo o livro: ";
-                    cin >> locatario;
+                    cin >> nome;
+                    cout << "Telefone: ";
+                    cin >> telefone;
                     for (indice = 0;indice < 100;indice++){
-                        if (l.locatario[indice] == locatario){
+                        if (strcmp(l[indice].locatario[indice].nome,nome) != 0){
+                            if(l[indice].locatario[indice].telefone == telefone){
                             pos = indice;
                             for (indice = pos ;indice < (*num_locatarios-1);indice ++){
-                                l[indice] = l[indice+1];
+                                l[indice].locatario[indice].nome = l[indice+1].locatario[indice+1].nome;
+                                l[indice].locatario[indice].telefone = l[indice+1].locatario[indice+1].telefone;
                                 (*num_locatarios--);
                                 cout << "livro devolvido!";
                                 break;
