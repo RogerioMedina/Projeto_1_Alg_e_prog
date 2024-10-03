@@ -103,7 +103,7 @@ void consultarLivros(struct livros vetorLivros[], int quant){
     }
 }
 
-void emprstimoLivros(struct livros l[]){
+void emprstimoLivros(struct livros l[], int quantidade){
     int opc = 0;
     int indice;
     
@@ -121,7 +121,7 @@ void emprstimoLivros(struct livros l[]){
         cout<<"Insira o ID do livro: ";
         cin>>id;
         
-        for(indice = 0; indice < 100; indice++){
+        for(indice = 0; indice < quantidade; indice++){
             if(l[indice].id == id){
                 break;    
             }
@@ -134,7 +134,7 @@ void emprstimoLivros(struct livros l[]){
         cout<<"Insira o nome do livro: ";
         cin>>titulo;
 
-        for(indice = 0; indice < 100; indice++){
+        for(indice = 0; indice < quantidade; indice++){
             if(strcmp(l[indice].titulo, titulo) != 0){
                 break;    
             }
@@ -288,11 +288,11 @@ int main()
     
     case 2:
 
-        consultarLivros( vetorLivros, qtdade);
+        consultarLivros(vetorLivros, qtdade);
         
     case 3:
 
-        emprestimoLivros();
+        emprestimoLivros(vetorLivros, &qtdade);
 
     case 4: 
 
