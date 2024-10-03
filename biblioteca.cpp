@@ -49,6 +49,49 @@ void printLivros(livros l[], int n){
         cout << "----------------------------------" << endl;
     }
 }
+void consultarLivros(livros l[], int quant){
+
+    int opt, id;
+    int pos;
+    bool encontrado;
+    char nome_livro[100];
+    do
+    {
+        cout << "1 - Mostrar todos" << endl;
+        cout << "2 - Buscar por nome" << endl;
+        cout << "3 - Buscar por ID" << endl;
+        cout << "----------------------" << endl;
+        cout << "Digite a opção";
+        cin >> opt;
+    }while(opt < 1 || opt > 3);
+    
+    switch(opt){
+        case 1:
+                printLivros(l,quant);
+            }
+            break;
+        case 2:
+            cout << "Insira o nome do livro: ";
+            cin.ignore();
+            cin.getline(nome_livro,100);
+            for(int i = 0; i < quant; i++){
+                if(l[i].titulo == nome_livro){
+                    printLivros(&l[i], quant);
+                }
+            }
+            break;
+        case 3:
+            cout << "Insira o ID do livro: ";
+            cin >> id;
+            for(int i = 0; i < quant; i++){
+                if(l[i].id == id){
+                    printLivros(l[i], quant);
+                }
+            }
+            break;
+    }
+
+/*
 
 void consultarLivros(struct livros vetorLivros[], int quant){
 
@@ -104,6 +147,7 @@ void consultarLivros(struct livros vetorLivros[], int quant){
         }
     }
 }
+*/
 
 void emprstimoLivros(struct livros l[], int quantidade){
     int opc = 0;
