@@ -37,18 +37,17 @@ void cadastroLivros(struct livros *l){
     }while(qtd_disp < 0 || qtd_disp > 10);
 }
 
-void printLivros(struct livros livro){
-
-
-    cout << "-------------- Livro -------------" << endl;
-    cout << "ID_Livro: " << livro.id << endl;
-    cout << "Título: " << livro.titulo << endl;
-    cout << "Autor: " << livro.autor << endl;
-    cout << "Numero de paginas: " << livro.num_pag << endl;
-    cout << "Ano Publicacao: " << livro.ano_publi << endl;
-    cout << "Quantidade disponível: " << livro.qtd_disp << endl;
-    cout << "----------------------------------" << endl;
-
+void printLivros(livros l[], int n){
+    for(int i = 0; i < n; i++){
+        cout << "-------------- Livro -------------" << endl;
+        cout << "ID Livro: " << l[i].id << endl;
+        cout << "Titulo: " << l[i].titulo << endl;
+        cout << "Autor: " << l[i].autor << endl;
+        cout << "Numero de paginas: " << l[i].num_pag << endl;
+        cout << "Ano Publicação: " << l[i].ano_publi << endl;
+        cout << "Quantidade disponível: " << l[i].qtd_disp << endl;
+        cout << "----------------------------------" << endl;
+    }
 }
 
 void consultarLivros(struct livros vetorLivros[], int quant){
