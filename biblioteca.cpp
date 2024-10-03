@@ -17,21 +17,24 @@ struct livros{
     
 };
 
-void cadastroLivros(struct livros vetorLivros[], int *pos){
-
-    printf("Insira o ID: ");
-    scanf("%d", &vetorLivros[*pos].id);
-    printf("Insira o titulo: ");
-    scanf(" %[^\n]", &vetorLivros[*pos].titulo);
-    printf("Insira o autor: ");
-    scanf(" %[^\n]", &vetorLivros[*pos].autor);
-    printf("Insira o numero de paginas: ");
-    scanf("%d", &vetorLivros[*pos].num_pag);
-    printf("Insira o ano de publicacao: ");
-    scanf("%d", &vetorLivros[*pos].ano_publi);
-    
-
-    (*pos)++;
+void cadastroLivros(struct livros *l){
+    do
+    {
+        cout << "Titulo: ";
+        cin.ignore();
+        cin.getline(l->titulo, 100);
+        cout << "Autor: ";
+        cin.ignore();
+        cin.getline(l->autor,100);
+        cout << "Numero de paginas: ";
+        cin >> l->num_pag;
+        cout << "Ano Publicação: ";
+        cin >> l->ano_publi;
+        cout << "ID: ";
+        cin >> l->id;
+        cout << "Quantidade disponivel: ";
+        cin >> l->qtd_disp;
+    }while(qtd_disp < 0 || qtd_disp > 10);
 }
 
 void printLivros(struct livros livro){
@@ -295,28 +298,36 @@ int main()
     switch (opt)
     {
     case 1:
-    
-        cadastroLivros(vetorLivros, &qtdade);
-    
+        int qtd;
+        cout << "Insira quantos livros voce deseja cadastrar: ";
+        cin >> qtd;
+        for(int i = 0; i < qtd; i++){
+            cadastroLivros(&vetorLivros[i]);
+        }
+        break;
     case 2:
 
         consultarLivros(vetorLivros, qtdade);
-        
+        break;
     case 3:
 
         emprestimoLivros(vetorLivros, &qtdade);
-
+        break;
     case 4: 
 
         devolucaoLivros();
-    
+        break;
+
     case 5:
 
         removerLivro(vetorLivros, &qtdade);
+        break;
 
     case 6:
 
         exit;
+        break;
+
     }
 
     }
