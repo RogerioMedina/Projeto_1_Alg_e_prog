@@ -37,17 +37,15 @@ void cadastroLivros(struct livros *l){
     }while(qtd_disp < 0 || qtd_disp > 10);
 }
 
-void printLivros(livros l[], int n){
-    for(int i = 0; i < n; i++){
-        cout << "-------------- Livro -------------" << endl;
-        cout << "ID Livro: " << l[i].id << endl;
-        cout << "Titulo: " << l[i].titulo << endl;
-        cout << "Autor: " << l[i].autor << endl;
-        cout << "Numero de paginas: " << l[i].num_pag << endl;
-        cout << "Ano Publicação: " << l[i].ano_publi << endl;
-        cout << "Quantidade disponível: " << l[i].qtd_disp << endl;
-        cout << "----------------------------------" << endl;
-    }
+void printLivros(livros l[]){
+    cout << "-------------- Livro -------------" << endl;
+    cout << "ID Livro: " << l[i].id << endl;
+    cout << "Titulo: " << l[i].titulo << endl;
+    cout << "Autor: " << l[i].autor << endl;
+    cout << "Numero de paginas: " << l[i].num_pag << endl;
+    cout << "Ano Publicação: " << l[i].ano_publi << endl;
+    cout << "Quantidade disponível: " << l[i].qtd_disp << endl;
+    cout << "----------------------------------" << endl;
 }
 void consultarLivros(livros l[], int quant){
 
@@ -67,7 +65,8 @@ void consultarLivros(livros l[], int quant){
     
     switch(opt){
         case 1:
-                printLivros(l,quant);
+            for(int i = 0; i < quant;i++){
+                printLivros(l[i]);
             }
             break;
         case 2:
@@ -76,7 +75,7 @@ void consultarLivros(livros l[], int quant){
             cin.getline(nome_livro,100);
             for(int i = 0; i < quant; i++){
                 if(l[i].titulo == nome_livro){
-                    printLivros(&l[i], quant);
+                    printLivros(&l[i]);
                 }
             }
             break;
@@ -85,7 +84,7 @@ void consultarLivros(livros l[], int quant){
             cin >> id;
             for(int i = 0; i < quant; i++){
                 if(l[i].id == id){
-                    printLivros(l[i], quant);
+                    printLivros(l[i]);
                 }
             }
             break;
