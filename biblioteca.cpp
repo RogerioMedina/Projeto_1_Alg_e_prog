@@ -174,7 +174,7 @@ void devolucaoLivros(struct livros l[], int *num_locatarios){
             int id,indice;
             cout << "Digite o id do livro que esta sendo devolvido: ";
             cin >> id;
-            for (indice = 0;indice < 100;indice++){
+            for (int indice = 0;indice < 100;indice++){
                 if (l.id[indice] == id){
                     char nome = 50;
                     int telefone;
@@ -182,11 +182,11 @@ void devolucaoLivros(struct livros l[], int *num_locatarios){
                     cin >> nome;
                     cout << "Telefone: ";
                     cin >> telefone;
-                    for (indice = 0;indice < 100;indice++){
+                    for (int indice = 0;indice < 100;indice++){
                         if (strcmp(l[indice].locatario[indice].nome,nome) != 0){
                             if(l[indice].locatario[indice].telefone == telefone){
                             pos = indice;
-                            for (indice = pos ;indice < (*num_locatarios-1);indice ++){
+                            for (int indice = pos ;indice < (*num_locatarios-1);indice ++){
                                 l[indice].locatario[indice].nome = l[indice+1].locatario[indice+1].nome;
                                 l[indice].locatario[indice].telefone = l[indice+1].locatario[indice+1].telefone;
                                 (*num_locatarios--);
@@ -210,7 +210,7 @@ void devolucaoLivros(struct livros l[], int *num_locatarios){
             char titulo = 100;
             cout << "Digite o titulo do livro que esta sendo devolvido: ";
             cin >> titulo;
-            for (indice = 0;indice<100;indice++){
+            for (int indice = 0;indice<100;indice++){
                 if (strcmp(l[indice].titulo, titulo) !=0){
                     char nome = 50;
                     int telefone;
@@ -218,11 +218,11 @@ void devolucaoLivros(struct livros l[], int *num_locatarios){
                     cin >> nome;
                     cout << "Telefone: ";
                     cin >> telefone;
-                    for (indice = 0;indice < 100;indice++){
+                    for (int indice = 0;indice < 100;indice++){
                         if (strcmp(l[indice].locatario[indice].nome,nome) != 0){
                             if(l[indice].locatario[indice].telefone == telefone){
                             pos = indice;
-                            for (indice = pos ;indice < (*num_locatarios-1);indice ++){
+                            for (int indice = pos ;indice < (*num_locatarios-1);indice ++){
                                 l[indice].locatario[indice].nome = l[indice+1].locatario[indice+1].nome;
                                 l[indice].locatario[indice].telefone = l[indice+1].locatario[indice+1].telefone;
                                 (*num_locatarios--);
