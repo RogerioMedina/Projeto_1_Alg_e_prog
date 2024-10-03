@@ -17,10 +17,10 @@ struct livros{
     
 };
 
-void cadastroLivros(struct livros vetorLivros[], *pos){
+void cadastroLivros(struct livros vetorLivros[], int *pos){
 
-    
-
+    printf("Insira o ID: ");
+    scanf("%d", &vetorLivros[*pos].id);
     printf("Insira o titulo: ");
     scanf(" %[^\n]", &vetorLivros[*pos].titulo);
     printf("Insira o autor: ");
@@ -29,18 +29,81 @@ void cadastroLivros(struct livros vetorLivros[], *pos){
     scanf("%d", &vetorLivros[*pos].num_pag);
     printf("Insira o ano de publicacao: ");
     scanf("%d", &vetorLivros[*pos].ano_publi);
-    printf("Insira o ID: ");
-    scanf("%d", &vetorLivros[*pos].id);
+    
 
     (*pos)++;
 }
 
-void printLivros(){
+void printLivros(struct livros livro){
 
+
+    cout << "-------------- Livro -------------" << endl;
+    cout << "ID_Livro: " << livro.id << endl;
+    cout << "Título: " << livro.titulo << endl;
+    cout << "Autor: " << livro.autor << endl;
+    cout << "Numero de paginas: " << livro.num_pag << endl;
+    cout << "Ano Publicacao: " << livro.ano_publi << endl;
+    cout << "Quantidade disponível: " << livro.qtd_disp << endl;
+    cout << "----------------------------------" << endl;
 
 }
 
-void emprstimoLivros(livros l[100]){
+void consultarLivros(struct livros vetorLivros[], int quant){
+
+    int opt, id;
+    int pos;
+    bool encontrado;
+    char titulo[100];
+    while(opt != 1 || opt != 2 || opt != 3){
+        cout << "1 - Mostrar todos" << endl;
+        cout << "2 - Buscar por nome" << endl;
+        cout << "3 - Buscar por ID" << endl;
+        cout << "----------------------" << endl;
+        cout << "Digite a opção";
+        cin >> opt;
+    }
+    if(opt == 1){
+        for(int i = 0; i<quant; i++) printLivros(vetorLivros[i]);
+    }
+    else if (opt == 2){
+        cout << "Digite o nome do livro: ";
+        cin >> titulo; //arrumar a forma de colocar o titulo
+
+        for(int i = 0; i < quant; i++){
+            if(vetorLivros[i].titulo == titulo){
+                pos = i;
+                encontrado = true;
+            }
+        }
+        if(encontrado == true){
+            printLivros(vetorLivros[pos])
+        }
+        else{
+            cout << "Livro não encontrado!";
+        }
+
+    }
+
+    else{
+        cout << "Digite o ID do livro: ";
+        cin >> id;
+       
+        for(int i = 0; i < quant; i++){
+            if(vetorLivros[i].id == id){
+                pos = i;
+                encontrado = true;
+            }
+        }
+        if(encontrado == true){
+            printLivros(vetorLivros[pos])
+        }
+        else{
+            cout << "ID do livro não encontrado!";
+        }
+    }
+}
+
+void emprstimoLivros(struct livros l[]){
     int opc = 0;
     int indice;
     
@@ -99,7 +162,7 @@ void emprstimoLivros(livros l[100]){
 
 }
 
-void devolucaoLivros(struct livros l[100],int *num_locatarios){ 
+void devolucaoLivros(struct livros l[], int *num_locatarios){ 
     int opc = 0;
     while(opc != 1 || opc != 2){
         cout << "Como deseja devolver o livro? " << endl;
@@ -166,7 +229,9 @@ void devolucaoLivros(struct livros l[100],int *num_locatarios){
 
 }
 
-void removerLivro(livros vec[], int *num_livros){
+}
+
+void removerLivro(struct livros vec[], int *num_livros){
     while(true){
         int id;
         cout << "Digite o ID do livro para remover do acervo: ";
@@ -223,7 +288,7 @@ int main()
     
     case 2:
 
-        consultarLivros();
+        consultarLivros( vetorLivros, qtdade);
         
     case 3:
 
