@@ -17,24 +17,50 @@ struct livros{
     
 };
 
-void cadastroLivros(struct livros *l){
-    do
-    {
-        cout << "Titulo: ";
-        cin.ignore();
-        cin.getline(l->titulo, 100);
-        cout << "Autor: ";
-        cin.ignore();
-        cin.getline(l->autor,100);
-        cout << "Numero de paginas: ";
-        cin >> l->num_pag;
-        cout << "Ano Publicação: ";
-        cin >> l->ano_publi;
-        cout << "ID: ";
-        cin >> l->id;
+void cadastroLivros(livros vec[], int *num_livro, int *id){
+    // ID Cadastrado automaticamente, garantido que não será repetido
+    vec[*num_livro].id = *id;
+
+    cout << "\n=====================================\n";
+    cout << "       CADASTRO DE LIVRO   |  ID: " << *id;                    
+    cout << "\n=====================================\n";
+    
+    cout << "Titulo: ";
+    cin.ignore();
+    cin.getline(vec[*num_livro].titulo, 100);
+    
+    cout << "=====================================\n";
+    cout << "Autor: ";
+    cin.ignore();
+    cin.getline(vec[*num_livro].autor,100);
+    
+    cout << "=====================================\n";
+    cout << "Numero de paginas: ";
+    cin >> vec[*num_livro].num_pag;
+    
+    cout << "=====================================\n";
+    cout << "Ano Publicação: ";
+    cin >> vec[*num_livro].ano_publi;
+    
+    cout << "=====================================\n";
+    while(true){
         cout << "Quantidade disponivel: ";
-        cin >> l->qtd_disp;
-    }while(qtd_disp < 0 || qtd_disp > 10);
+        cin >> vec[*num_livro].qtd_disp;
+        if(vec[*num_livro].qtd_disp <= 0 || vec[*num_livro].qtd_disp > 10){
+            cout << "=====================================\n";
+            cout << "\tDigite valores válidos!\n\t  Tente novamente" << endl;
+            cout << "=====================================\n";
+            continue;
+        }
+        break;
+    }
+    
+    cout << "\n=====================================\n";
+    cout << "       LIVRO CADASTRADO   |  ID: " << *id;                    
+    cout << "\n=====================================\n";
+    
+    (*num_livro)++;
+    (*id)++;
 }
 
 void printLivros(livros l[]){
