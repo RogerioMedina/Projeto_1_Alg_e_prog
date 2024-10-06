@@ -346,59 +346,45 @@ void removerLivro(struct livros vec[], int *num_livros){
 int main()
 {
     struct livros vetorLivros[100];
-    int opt, qtdade = 0;
-
+    int *num_livros = new int;
+    *num_livros = 0;
+    int *id_manager = new int;
+    *id_manager = 1;
+    
     while(opt != 6){
-
-    cout << "-------------------------------------" << endl;
-    cout << "---------------MENU------------------" << endl;
-    cout << "-------------------------------------" << endl;
-    cout << "----- 1 - Cadastrar Livro -----------" << endl;
-    cout << "----- 2 - Consultar livro -----------" << endl;
-    cout << "----- 3 - Emprestimos de livros -----" << endl;
-    cout << "----- 4 - Devolucao de livros -------" << endl;
-    cout << "----- 5 - Remocao de livros ---------" << endl;
-    cout << "----- 6 - Sair do programa ----------" << endl;
-    cout << "-------------------------------------" << endl;
-    cout << "Selecione a opcao desejada: ";
-    cin >> opt;
-
-    switch (opt)
-    {
-    case 1:
-        int qtd;
-        cout << "Insira quantos livros voce deseja cadastrar: ";
-        cin >> qtd;
-        for(int i = 0; i < qtd; i++){
-            cadastroLivros(&vetorLivros[i]);
+        cout << "=====================================" << endl;
+        cout << "---------------MENU------------------" << endl;
+        cout << "=====================================" << endl;
+        cout << "----- 1 - Cadastrar Livro -----------" << endl;
+        cout << "----- 2 - Consultar livro -----------" << endl;
+        cout << "----- 3 - Emprestimos de livros -----" << endl;
+        cout << "----- 4 - Devolucao de livros -------" << endl;
+        cout << "----- 5 - Remocao de livros ---------" << endl;
+        cout << "----- 6 - Sair do programa ----------" << endl;
+        cout << "=====================================" << endl;
+        cout << "Selecione a opcao desejada: ";
+        cin >> opt;
+    
+        switch (opt){
+        case 1:
+            cadastroLivros(vetorLivros, num_livros, id_manager);
+            break;
+        case 2:
+            consultarLivros(vetorLivros, qtdade);
+            break;
+        case 3:
+            emprestimoLivros(vetorLivros, &qtdade);
+            break;
+        case 4: 
+            devolucaoLivros();
+            break;
+        case 5:
+            removerLivro(vetorLivros, &qtdade);
+            break;
+        case 6:
+            exit;
+            break;
         }
-        break;
-    case 2:
-
-        consultarLivros(vetorLivros, qtdade);
-        break;
-    case 3:
-
-        emprestimoLivros(vetorLivros, &qtdade);
-        break;
-    case 4: 
-
-        devolucaoLivros();
-        break;
-
-    case 5:
-
-        removerLivro(vetorLivros, &qtdade);
-        break;
-
-    case 6:
-
-        exit;
-        break;
-
-    }
-
     }
     return 0;
-
 }
