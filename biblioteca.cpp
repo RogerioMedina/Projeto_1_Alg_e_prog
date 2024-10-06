@@ -73,106 +73,69 @@ void printLivros(livros l[]){
     cout << "Quantidade disponível: " << l[i].qtd_disp << endl;
     cout << "----------------------------------" << endl;
 }
-void consultarLivros(livros l[], int quant){
+void consultarLivros(livros l[], int *quant){
 
     int opt, id;
     int pos;
-    bool encontrado;
+    bool encontrado = false;
     char nome_livro[100];
     do
     {
-        cout << "1 - Mostrar todos" << endl;
-        cout << "2 - Buscar por nome" << endl;
-        cout << "3 - Buscar por ID" << endl;
-        cout << "----------------------" << endl;
-        cout << "Digite a opção";
+        cout << "\n=====================================\n";
+        cout << "            CONSULTAR LIVRO            ";
+        cout << "\n=====================================\n";
+        cout << "           1 - Mostrar todos" << endl;
+        cout << "           2 - Buscar por nome" << endl;
+        cout << "           3 - Buscar por ID" << endl;
+        cout << "=====================================\n";
+        cout << "Digite a opção: ";
         cin >> opt;
     }while(opt < 1 || opt > 3);
     
     switch(opt){
         case 1:
-            for(int i = 0; i < quant;i++){
-                printLivros(l[i]);
+            if(*quant == 0){
+                cout << "\n=====================================\n";
+                cout << "       NÃO HÁ LIVROS CADASTRADOS         ";
+                cout << "\n=====================================\n";
+                break;
+            }
+            
+            for(int i = 0; i < *quant; i++){
+                printLivros(l, i);
             }
             break;
         case 2:
             cout << "Insira o nome do livro: ";
             cin.ignore();
-            cin.getline(nome_livro,100);
-            for(int i = 0; i < quant; i++){
-                if(l[i].titulo == nome_livro){
-                    printLivros(&l[i]);
+            cin.getline(nome_livro, 100);
+            
+            for(int i = 0; i < *quant; i++){
+                if(strcmp(nome_livro, l[i].titulo) == 0){
+                    encontrado = true;
+                    printLivros(l, i);
                 }
             }
             break;
         case 3:
             cout << "Insira o ID do livro: ";
             cin >> id;
-            for(int i = 0; i < quant; i++){
+            
+            for(int i = 0; i < *quant; i++){
                 if(l[i].id == id){
-                    printLivros(l[i]);
+                    encontrado = true;
+                    printLivros(l, i);
                 }
             }
             break;
+    
+    if(!encontrado) {
+        cout << "\n=====================================\n";
+        cout << "            LIVRO NÃO ENCONTRADO         ";
+        cout << "\n=====================================\n";
     }
-
-/*
-
-void consultarLivros(struct livros vetorLivros[], int quant){
-
-    int opt, id;
-    int pos;
-    bool encontrado;
-    char titulo[100];
-    while(opt != 1 || opt != 2 || opt != 3){
-        cout << "1 - Mostrar todos" << endl;
-        cout << "2 - Buscar por nome" << endl;
-        cout << "3 - Buscar por ID" << endl;
-        cout << "----------------------" << endl;
-        cout << "Digite a opção";
-        cin >> opt;
-    }
-    if(opt == 1){
-        for(int i = 0; i<quant; i++) printLivros(vetorLivros[i]);
-    }
-    else if (opt == 2){
-        cout << "Digite o nome do livro: ";
-        cin >> titulo; //arrumar a forma de colocar o titulo
-
-        for(int i = 0; i < quant; i++){
-            if(vetorLivros[i].titulo == titulo){
-                pos = i;
-                encontrado = true;
-            }
-        }
-        if(encontrado == true){
-            printLivros(vetorLivros[pos])
-        }
-        else{
-            cout << "Livro não encontrado!";
-        }
-
-    }
-
-    else{
-        cout << "Digite o ID do livro: ";
-        cin >> id;
-       
-        for(int i = 0; i < quant; i++){
-            if(vetorLivros[i].id == id){
-                pos = i;
-                encontrado = true;
-            }
-        }
-        if(encontrado == true){
-            printLivros(vetorLivros[pos])
-        }
-        else{
-            cout << "ID do livro não encontrado!";
-        }
     }
 }
-*/
 
 void emprstimoLivros(struct livros l[], int quantidade){
     int opc = 0;
@@ -370,7 +333,7 @@ int main()
             cadastroLivros(vetorLivros, num_livros, id_manager);
             break;
         case 2:
-            consultarLivros(vetorLivros, qtdade);
+            consultarLivros(vetorLivros, num_livros);
             break;
         case 3:
             emprestimoLivros(vetorLivros, &qtdade);
