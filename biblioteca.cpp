@@ -79,6 +79,14 @@ void consultarLivros(livros l[], int *quant){
     int pos;
     bool encontrado = false;
     char nome_livro[100];
+    
+    if(*quant == 0){
+        cout << "\n=====================================\n";
+        cout << "       NÃO HÁ LIVROS CADASTRADOS         ";
+        cout << "\n=====================================\n";
+        return;
+    }
+    
     do
     {
         cout << "\n=====================================\n";
@@ -94,16 +102,7 @@ void consultarLivros(livros l[], int *quant){
     
     switch(opt){
         case 1:
-            if(*quant == 0){
-                cout << "\n=====================================\n";
-                cout << "       NÃO HÁ LIVROS CADASTRADOS         ";
-                cout << "\n=====================================\n";
-                break;
-            }
-            
-            for(int i = 0; i < *quant; i++){
-                printLivros(l, i);
-            }
+            for(int i = 0; i < *quant; i++) printLivros(l, i);
             break;
         case 2:
             cout << "Insira o nome do livro: ";
