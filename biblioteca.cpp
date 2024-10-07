@@ -73,7 +73,9 @@ void printLivros(livros l[]){
     cout << "Quantidade disponível: " << l[i].qtd_disp << endl;
     cout << "----------------------------------" << endl;
 }
-void consultarLivros(livros l[], int *quant){
+void consultarLivros(livros l[], int *quant){ 
+
+    /*precisa retirar o ponteiro, pois o valor quant não é alterado na função.*/
 
     int opt, id;
     int pos;
@@ -136,7 +138,7 @@ void consultarLivros(livros l[], int *quant){
     }
 }
 
-void emprstimoLivros(struct livros l[], int quantidade){
+void emprestimoLivros(struct livros l[], int quantidade){
     int opc = 0;
     int indice;
     
