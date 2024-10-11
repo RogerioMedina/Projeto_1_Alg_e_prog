@@ -1,9 +1,9 @@
 #include <iostream>
+#include <string.h>
 using namespace std;
 
 struct pessoa{
     char nome[50];
-    int telefone;
 };
 
 struct livros{
@@ -12,7 +12,7 @@ struct livros{
     int num_pag;
     int ano_publi;
     int id;
-    int qtd_disp[10];
+    int qtd_disp;
     struct pessoa locatarios[10];
     
 };
@@ -31,7 +31,6 @@ void cadastroLivros(livros vec[], int *num_livro, int *id){
     
     cout << "=====================================\n";
     cout << "Autor: ";
-    cin.ignore();
     cin.getline(vec[*num_livro].autor,100);
     
     cout << "=====================================\n";
@@ -52,6 +51,9 @@ void cadastroLivros(livros vec[], int *num_livro, int *id){
             cout << "=====================================\n";
             continue;
         }
+        for(int i = 0; i < vec[*num_livro].qtd_disp; i++){
+            strcpy(vec[*num_livro].locatarios[i].nome, "");
+        }
         break;
     }
     
@@ -63,17 +65,18 @@ void cadastroLivros(livros vec[], int *num_livro, int *id){
     (*id)++;
 }
 
-void printLivros(livros l[]){
+void printLivros(livros livro){
     cout << "-------------- Livro -------------" << endl;
-    cout << "ID Livro: " << l[i].id << endl;
-    cout << "Titulo: " << l[i].titulo << endl;
-    cout << "Autor: " << l[i].autor << endl;
-    cout << "Numero de paginas: " << l[i].num_pag << endl;
-    cout << "Ano Publicação: " << l[i].ano_publi << endl;
-    cout << "Quantidade disponível: " << l[i].qtd_disp << endl;
+    cout << "ID Livro: " << livro.id << endl;
+    cout << "Titulo: " << livro.titulo << endl;
+    cout << "Autor: " << livro.autor << endl;
+    cout << "Numero de paginas: " << livro.num_pag << endl;
+    cout << "Ano Publicação: " << livro.ano_publi << endl;
+    cout << "Quantidade disponível: " << livro.qtd_disp << endl;
     cout << "----------------------------------" << endl;
 }
-void consultarLivros(livros l[], int *quant){ 
+
+void consultarLivros(livros l[], int quant){ 
 
     /*precisa retirar o ponteiro, pois o valor quant não é alterado na função.*/
 
@@ -82,7 +85,7 @@ void consultarLivros(livros l[], int *quant){
     bool encontrado = false;
     char nome_livro[100];
     
-    if(*quant == 0){
+    if(quant == 0){
         cout << "\n=====================================\n";
         cout << "       NÃO HÁ LIVROS CADASTRADOS         ";
         cout << "\n=====================================\n";
@@ -104,17 +107,18 @@ void consultarLivros(livros l[], int *quant){
     
     switch(opt){
         case 1:
-            for(int i = 0; i < *quant; i++) printLivros(l, i);
+            for(int i = 0; i < quant; i++) printLivros(l[i]);
+            encontrado = true;
             break;
         case 2:
             cout << "Insira o nome do livro: ";
             cin.ignore();
             cin.getline(nome_livro, 100);
             
-            for(int i = 0; i < *quant; i++){
+            for(int i = 0; i < quant; i++){
                 if(strcmp(nome_livro, l[i].titulo) == 0){
                     encontrado = true;
-                    printLivros(l, i);
+                    printLivros(l[i]);
                 }
             }
             break;
@@ -122,34 +126,34 @@ void consultarLivros(livros l[], int *quant){
             cout << "Insira o ID do livro: ";
             cin >> id;
             
-            for(int i = 0; i < *quant; i++){
+            for(int i = 0; i < quant; i++){
                 if(l[i].id == id){
                     encontrado = true;
-                    printLivros(l, i);
+                    printLivros(l[i]);
                 }
             }
             break;
-    
+    }
     if(!encontrado) {
         cout << "\n=====================================\n";
         cout << "            LIVRO NÃO ENCONTRADO         ";
         cout << "\n=====================================\n";
     }
-    }
+    
 }
 
 void emprestimoLivros(struct livros l[], int quantidade){
     int opc = 0;
     int indice;
     
-    while(opc != 1 || opc != 2){
+    do{
         cout<<"Como deseja procurar o livro para emprestimo?"<<endl;
-        cout<<"1- Por ID\n-2- Por nome";
+        cout<<"1- Por ID\n2- Por nome" << endl;
         cin>>opc;
-        if(opc != 1 || opc != 2){
+        if(opc != 1 && opc != 2){
             cout<<"Digite uma opção valida"<<endl;
         }
-    }
+    }while(opc != 1 && opc != 2);
 
     if(opc == 1){
         int id;
@@ -161,13 +165,12 @@ void emprestimoLivros(struct livros l[], int quantidade){
                 break;    
             }
         }
-        
     }
 
     if(opc == 2){
-        char titulo = 100;
+        char titulo[100];
         cout<<"Insira o nome do livro: ";
-        cin>>titulo;
+        cin.getline(titulo, 100);
 
         for(indice = 0; indice < quantidade; indice++){
             if(strcmp(l[indice].titulo, titulo) != 0){
@@ -178,18 +181,16 @@ void emprestimoLivros(struct livros l[], int quantidade){
 
     if(l[indice].qtd_disp > 0){
         char nome[100];
-        int telefone;
-
+    
         cout<<"Insira seu nome: ";
-        cin>>nome;
-        cout<<"Insira seu numero de telefone: ";
-        cin>>telefone;
+        cin.ignore();
+        cin.getline(nome, 100);
 
-        l[indice].locatarios[11-l[indice].qtd_disp].nome = nome;
-        l[indice].locatarios[11-l[indice].qtd_disp].telefone = telefone;
-
-        cout<<"Livro emprestado com sucesso.";
-        l[indice].qtd_disp = l[indice].qtd_disp-1;
+        strcpy(l[indice].locatarios[10-l[indice].qtd_disp].nome, nome);
+        
+        cout<<"Livro emprestado com sucesso." << endl;
+        (l[indice].qtd_disp)--;
+        
     }else{
         cout<<"Não há mais copias disponiveis";
     }
@@ -197,84 +198,31 @@ void emprestimoLivros(struct livros l[], int quantidade){
 
 }
 
-void devolucaoLivros(struct livros l[], int *num_locatarios){ 
-    int opc = 0;
-    while(opc != 1 || opc != 2){
-        cout << "Como deseja devolver o livro? " << endl;
-        cout << "1-id \n2-titulo";
-        cin >> opc;
-        if(opc != 1 || opc != 2){
-            cout<<"Digite uma opção valida"<<endl;
-        if (opc == 1){
-            int id,indice;
-            cout << "Digite o id do livro que esta sendo devolvido: ";
-            cin >> id;
-            for (int indice = 0;indice < 100;indice++){
-                if (l.id[indice] == id){
-                    char nome = 50;
-                    int telefone;
-                    cout << "Digite o nome de quem esta devolvendo o livro: ";
-                    cin >> nome;
-                    cout << "Telefone: ";
-                    cin >> telefone;
-                    for (int indice = 0;indice < 100;indice++){
-                        if (strcmp(l[indice].locatario[indice].nome,nome) != 0){
-                            if(l[indice].locatario[indice].telefone == telefone){
-                            pos = indice;
-                            for (int indice = pos ;indice < (*num_locatarios-1);indice ++){
-                                l[indice].locatario[indice].nome = l[indice+1].locatario[indice+1].nome;
-                                l[indice].locatario[indice].telefone = l[indice+1].locatario[indice+1].telefone;
-                                (*num_locatarios--);
-                                cout <<"Livro devolvido!";
-                                break
-                                     }
-                else{
-                    cout << "id nao encontrado!";
-                    continue;
-                            }
-                        }
-                    }
-                    
-                }
-            }
-        }
-    }
-    
-        if (opc == 2){
-            int indice;
-            char titulo = 100;
-            cout << "Digite o titulo do livro que esta sendo devolvido: ";
-            cin >> titulo;
-            for (int indice = 0;indice<100;indice++){
-                if (strcmp(l[indice].titulo, titulo) !=0){
-                    char nome = 50;
-                    int telefone;
-                    cout << "Digite o nome de quem esta devolvendo o livro: ";
-                    cin >> nome;
-                    cout << "Telefone: ";
-                    cin >> telefone;
-                    for (int indice = 0;indice < 100;indice++){
-                        if (strcmp(l[indice].locatario[indice].nome,nome) != 0){
-                            if(l[indice].locatario[indice].telefone == telefone){
-                            pos = indice;
-                            for (int indice = pos ;indice < (*num_locatarios-1);indice ++){
-                                l[indice].locatario[indice].nome = l[indice+1].locatario[indice+1].nome;
-                                l[indice].locatario[indice].telefone = l[indice+1].locatario[indice+1].telefone;
-                                (*num_locatarios--);
-                                cout << "livro devolvido!";
-                                break;
-                else{
-                    cout << "titulo nao encontrado!";
-                    continue;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+void devolucaoLivros(struct livros livro[], int quant){
 
-}
+    int ID;
+    char nome[100];
+    cout << "Qual ID do livro que será devolvido? ";
+    cin >> ID;
+
+    cout << "Qual o nome do locatário? ";
+    cin.ignore();
+    cin.getline(nome,100);
+
+    for(int i = 0; i < quant; i++){
+        if(livro[i].id == ID){
+            for(int j = 0; j < (10-(livro[i].qtd_disp)); j++){
+                if(strcmp(livro[i].locatarios[j].nome, nome)==0){
+                    strcpy(livro[i].locatarios[j].nome, "");
+                    cout << "Livro devolvido. Obrigado!" << endl;
+                    (livro[i].qtd_disp)++;
+                    break;
+                }
+                cout << "Locatário não encontrado" << endl;
+            }
+
+        }
+    }
 
 }
 
@@ -314,7 +262,8 @@ int main()
     *num_livros = 0;
     int *id_manager = new int;
     *id_manager = 1;
-    
+    int opt = 0;
+
     while(opt != 6){
         cout << "=====================================" << endl;
         cout << "---------------MENU------------------" << endl;
@@ -334,16 +283,16 @@ int main()
             cadastroLivros(vetorLivros, num_livros, id_manager);
             break;
         case 2:
-            consultarLivros(vetorLivros, num_livros);
+            consultarLivros(vetorLivros, *num_livros);
             break;
         case 3:
-            emprestimoLivros(vetorLivros, &qtdade);
+            emprestimoLivros(vetorLivros, *num_livros);
             break;
         case 4: 
-            devolucaoLivros();
+            devolucaoLivros(vetorLivros, *num_livros);
             break;
         case 5:
-            removerLivro(vetorLivros, &qtdade);
+            removerLivro(vetorLivros, num_livros);
             break;
         case 6:
             exit;
