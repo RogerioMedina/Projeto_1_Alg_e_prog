@@ -2,6 +2,8 @@
 #include <string.h>
 using namespace std;
 
+// participantes: Enzo, Gabriel, Henry, Rogerio
+
 struct pessoa{
     char nome[50];
 };
@@ -267,7 +269,7 @@ void devolucaoLivros(struct livros livro[], int quant){
         char nome[100];
 
         cout<<"\n=====================================\n";
-        cout << "Digite Id do Livro: ";
+        cout << "Digite ID do Livro: ";
         cin >> ID;
         cout<<"=====================================\n";
 
@@ -304,7 +306,7 @@ void removerLivro(struct livros vec[], int *num_livros){
     
     int removerMais = 0;
     do{
-        while(true){
+        while(*num_livros > 0){
             int id;
             int opt = 0;
             cout << "Deseja listar os livros cadastrados?\n";
@@ -317,7 +319,7 @@ void removerLivro(struct livros vec[], int *num_livros){
                     printLivros(vec[i]);
                 }
             }
-            cout << "=====================================";       
+            cout << "====================================="<<endl;       
             
             cout << "Digite o ID do livro para remover do acervo: ";
             cin >> id;
@@ -336,19 +338,21 @@ void removerLivro(struct livros vec[], int *num_livros){
                 {
                     vec[i] = vec[i+1];
                 }
-                cout << "Livro removido!";
+                cout << "Livro removido!"<<endl;
                 (*num_livros)--;
                 break;
             }else{
                 cout << "\nLivro nao encontrado!\nTente novamente!";
-                continue;
             }
         }
-        cout << "Deseja remover outro livro?\n";
-        cout << "1 - Sim / 2 - Nao\n";
-        cout << "Opcao: ";
-        cin >> removerMais;
-
+        if(*num_livros == 0){
+           cout<<"Nao ha livros para remover";
+        }else{
+            cout << "Deseja remover outro livro?\n";
+            cout << "1 - Sim / 2 - Nao\n";
+            cout << "Opcao: ";
+            cin >> removerMais;
+        }
     }while(removerMais == 1);
 }
 
