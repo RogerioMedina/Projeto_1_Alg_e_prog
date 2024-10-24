@@ -346,7 +346,7 @@ void removerLivro(struct livros vec[], int *num_livros){
             }
         }
         if(*num_livros == 0){
-           cout<<"Nao ha livros para remover";
+           cout<<"Nao ha livros para remover"<<endl;
         }else{
             cout << "Deseja remover outro livro?\n";
             cout << "1 - Sim / 2 - Nao\n";
