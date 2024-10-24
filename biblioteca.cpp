@@ -2,7 +2,7 @@
 #include <string.h>
 using namespace std;
 
-// participantes: Enzo, Gabriel, Henry, Rogerio
+// participantes: Enzo, Gabriel, Henry, Rogerio, Pedro
 
 struct pessoa{
     char nome[50];
